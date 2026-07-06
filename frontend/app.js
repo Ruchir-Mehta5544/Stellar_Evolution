@@ -6,8 +6,6 @@ const chart = document.querySelector("#chart");
 const ctx = chart.getContext("2d");
 const hrDiagram = document.querySelector("#hr-diagram");
 const hrCtx = hrDiagram.getContext("2d");
-const validationMessage = document.querySelector("#validation-message");
-
 let frames = [];
 
 const fields = {
@@ -93,21 +91,6 @@ function validatePayload(payload) {
   }
 
   return { issues, options };
-}
-
-function showValidation(issues, options) {
-  if (!issues.length) {
-    validationMessage.hidden = true;
-    validationMessage.textContent = "";
-    return;
-  }
-
-  validationMessage.hidden = false;
-  validationMessage.innerHTML = `
-    <strong>Input check</strong>
-    <span>${issues.join(" ")}</span>
-    <span>Suggested options: ${options.join(" ")}</span>
-  `;
 }
 
 function drawChart(currentIndex) {
@@ -279,7 +262,6 @@ async function runSimulation() {
   setStatus("Running");
   const payload = payloadFromForm();
   const validation = validatePayload(payload);
-  showValidation(validation.issues, validation.options);
   if (validation.issues.length) {
     setStatus("Check inputs");
     return;
@@ -294,7 +276,6 @@ async function runSimulation() {
   const data = await response.json();
   if (!response.ok) {
     setStatus("Error");
-    showValidation([data.error || "Simulation failed."], ["Use the suggested ranges shown beside each input."]);
     return;
   }
 
@@ -302,7 +283,6 @@ async function runSimulation() {
   slider.max = String(frames.length - 1);
   slider.value = "0";
   setStatus("Ready");
-  showValidation([], []);
   renderFrame(0);
 }
 

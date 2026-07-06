@@ -92,21 +92,6 @@ h3 {
   margin-top: 24px;
 }
 
-.validation-message {
-  display: grid;
-  gap: 6px;
-  padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--danger) 70%, transparent);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--danger) 14%, transparent);
-  color: #ffd8d5;
-  font-size: 0.9rem;
-}
-
-.validation-message strong {
-  color: #ffffff;
-}
-
 label {
   display: grid;
   gap: 6px;
@@ -167,49 +152,6 @@ button {
   overflow: hidden;
 }
 
-.orbit-ring {
-  position: absolute;
-  width: min(64vw, 620px);
-  aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50%;
-  animation: orbitSpin 18s linear infinite;
-}
-
-.orbit-ring-a::after,
-.orbit-ring-b::after {
-  content: "";
-  position: absolute;
-  top: 49%;
-  left: -4px;
-  width: 8px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #d9f7ff;
-  box-shadow: 0 0 16px #d9f7ff;
-}
-
-.orbit-ring-b {
-  width: min(48vw, 460px);
-  transform: rotate(58deg);
-  border-color: rgba(98, 214, 210, 0.22);
-  animation-duration: 11s;
-  animation-direction: reverse;
-}
-
-.accretion-dust {
-  position: absolute;
-  width: min(54vw, 520px);
-  aspect-ratio: 1 / 0.42;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse, transparent 52%, color-mix(in srgb, var(--star-color, #fff4e8) 24%, transparent) 55%, transparent 68%),
-    linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
-  filter: blur(2px);
-  transform: rotate(-10deg);
-  animation: dustDrift 9s ease-in-out infinite alternate;
-}
-
 .star {
   position: relative;
   width: var(--star-size, 180px);
@@ -261,17 +203,6 @@ button {
   pointer-events: none;
   animation: glowBloom 3.4s ease-in-out infinite;
   z-index: 1;
-}
-
-.lens-flare {
-  position: absolute;
-  width: min(52vw, 520px);
-  height: 2px;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--star-color, #fff4e8) 75%, white), transparent);
-  opacity: 0.48;
-  filter: blur(1px);
-  animation: flareSweep 5.5s ease-in-out infinite;
-  z-index: 3;
 }
 
 .timeline {
@@ -381,34 +312,6 @@ canvas {
   50% {
     opacity: 0.86;
     transform: scale(1.08);
-  }
-}
-
-@keyframes orbitSpin {
-  to {
-    rotate: 360deg;
-  }
-}
-
-@keyframes dustDrift {
-  from {
-    opacity: 0.34;
-    transform: rotate(-14deg) scale(0.96);
-  }
-  to {
-    opacity: 0.72;
-    transform: rotate(-4deg) scale(1.04);
-  }
-}
-
-@keyframes flareSweep {
-  0%, 100% {
-    opacity: 0.24;
-    transform: translateX(-18px) rotate(-6deg);
-  }
-  50% {
-    opacity: 0.62;
-    transform: translateX(18px) rotate(6deg);
   }
 }
 
