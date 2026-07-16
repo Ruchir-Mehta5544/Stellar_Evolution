@@ -266,9 +266,20 @@ async function runSimulation() {
   setStatus("Running");
   const payload = payloadFromForm();
   const validation = validatePayload(payload);
+  const errorContainer = document.querySelector("#validation-errors");
+
   if (validation.issues.length) {
     setStatus("Check inputs");
+    if (errorContainer) {
+      errorContainer.innerHTML = `<strong>Please correct the following:</strong><ul style="margin: 4px 0 0; padding-left: 16px;">${validation.issues.map(issue => `<li>${issue}</li>`).join("")}</ul>`;
+      errorContainer.hidden = false;
+    }
     return;
+  }
+
+  if (errorContainer) {
+    errorContainer.hidden = true;
+    errorContainer.innerHTML = "";
   }
 
   const response = await fetch("/evolution", {
@@ -280,6 +291,10 @@ async function runSimulation() {
   const data = await response.json();
   if (!response.ok) {
     setStatus("Error");
+    if (errorContainer) {
+      errorContainer.innerHTML = `<strong>Simulation failed:</strong> ${data.error || "Failed to solve structure equations."}`;
+      errorContainer.hidden = false;
+    }
     return;
   }
 
@@ -296,11 +311,21 @@ slider.addEventListener("input", () => {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const errorContainer = document.querySelector("#validation-errors");
+  if (errorContainer) {
+    errorContainer.hidden = true;
+    errorContainer.innerHTML = "";
+  }
   try {
     window.currentSimulationPresetName = window.activePresetName;
     await runSimulation();
   } catch (error) {
-    alert(error.message);
+    if (errorContainer) {
+      errorContainer.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      errorContainer.hidden = false;
+    } else {
+      alert(error.message);
+    }
   }
 });
 
