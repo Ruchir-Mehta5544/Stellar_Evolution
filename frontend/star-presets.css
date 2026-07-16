@@ -1,0 +1,62 @@
+/**
+ * star-presets.css
+ * ----------------------------------------------------------------------
+ * Styling for the star-category preset buttons. Purely additive — no
+ * existing selectors are touched. Reuses the CSS custom properties
+ * already defined on :root in styles.css (--panel-2, --line, --text,
+ * --muted, --accent) so these buttons match the existing dark theme
+ * without introducing a second set of design tokens.
+ *
+ * .preset-btn intentionally overrides the page's generic `button { }`
+ * rule (min-height, background, border, color) — a class selector
+ * always wins over a bare type selector, so this is safe regardless of
+ * <link> order in <head>.
+ * ----------------------------------------------------------------------
+ */
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.preset-btn {
+  --preset-color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 0;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.preset-btn:hover {
+  border-color: var(--preset-color);
+}
+
+.preset-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.preset-btn--active {
+  background: color-mix(in srgb, var(--preset-color) 20%, var(--panel-2));
+  border-color: var(--preset-color);
+}
+
+.preset-btn__swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--preset-color);
+  box-shadow: 0 0 5px var(--preset-color);
+  flex-shrink: 0;
+}
