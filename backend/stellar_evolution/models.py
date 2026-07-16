@@ -170,3 +170,4 @@ class SimulationConfig:
                 data.get("surface_pressure_fraction", 1.0e-6)
             ),
         )
+

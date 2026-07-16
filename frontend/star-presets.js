@@ -95,4 +95,34 @@ window.StarPresets = {
       metals: 0.02,
     },
   },
+  whiteDwarf: {
+    label: "White Dwarf",
+    color: "#e0e8ff",
+    description:
+      "Dense, glowing remnant of a low-mass star. Highly dense, slowly cooling over trillions of years.",
+    fields: {
+      mass: 0.6,
+      radius: 0.1,
+      "central-temperature": 1.0e7,
+      "central-pressure": 1.0e18,
+      hydrogen: 0.0,
+      helium: 0.99,
+      metals: 0.01,
+    },
+  },
+  wolfRayet: {
+    label: "Wolf Rayet",
+    color: "#8ce2ff",
+    description:
+      "Massive, extremely hot star with little hydrogen, burning helium and heavier elements at its core.",
+    fields: {
+      mass: 20.0,
+      radius: 2.0,
+      "central-temperature": 5.0e7,
+      "central-pressure": 1.0e17,
+      hydrogen: 0.1,
+      helium: 0.88,
+      metals: 0.02,
+    },
+  },
 };

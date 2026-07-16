@@ -247,7 +247,11 @@ function renderFrame(index) {
   document.documentElement.style.setProperty("--star-size", `${starSize}px`);
   star.style.backgroundColor = frame.color.hex;
 
-  output.phase.textContent = frame.phase;
+  if (index === frames.length - 1 && window.currentSimulationPresetName) {
+    output.phase.textContent = window.currentSimulationPresetName;
+  } else {
+    output.phase.textContent = frame.phase;
+  }
   output.age.textContent = formatYears(frame.age_years);
   output.colorLabel.textContent = frame.color.label;
   output.temperature.textContent = `${Math.round(frame.effective_temperature).toLocaleString()} K`;
@@ -293,6 +297,7 @@ slider.addEventListener("input", () => {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   try {
+    window.currentSimulationPresetName = window.activePresetName;
     await runSimulation();
   } catch (error) {
     alert(error.message);

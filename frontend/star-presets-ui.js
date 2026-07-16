@@ -48,6 +48,7 @@
         b.classList.remove("preset-btn--active");
       });
       btn.classList.add("preset-btn--active");
+      window.activePresetName = preset.label;
     });
 
     return btn;
@@ -60,6 +61,17 @@
   if (container && window.StarPresets) {
     Object.keys(window.StarPresets).forEach(function (presetId) {
       container.appendChild(buildButton(window.StarPresets[presetId], container));
+    });
+
+    // Clear active preset if the user manually edits any input in the form
+    const inputs = document.querySelectorAll("#simulation-form input");
+    inputs.forEach(function (input) {
+      input.addEventListener("input", function () {
+        container.querySelectorAll(".preset-btn").forEach(function (btn) {
+          btn.classList.remove("preset-btn--active");
+        });
+        window.activePresetName = null;
+      });
     });
   }
 })();
